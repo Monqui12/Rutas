@@ -191,6 +191,16 @@ export default {
         console.log(this.estudiantes);
         let map = this.map;
         this.estudiantes.forEach(element => {
+          console.log({ lat: parseFloat(element.latitud) , lng: parseFloat(element.longitud) });
+          new google.maps.Marker({
+              position: { lat: parseFloat(element.latitud) , lng: parseFloat(element.longitud) },
+              map,
+              title: element.nombres,
+            });
+        });
+        return false;
+
+        this.estudiantes.forEach(element => {
           this.geocoder
           .geocode({ 'address': element.direccion})
           .then((result) => {

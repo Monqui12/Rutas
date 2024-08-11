@@ -18,4 +18,20 @@ class BusesController extends Controller
         $oBuses = Buse::all();
         return ['buses'=> $oBuses];
     }
+    public function actualizar($id){
+        try {
+            $oBuses = Buse::find($id);
+            if($oBuses->habilitado == 1){
+                $oBuses->habilitado = 0;
+            }
+            if($oBuses->habilitado == 0){
+                $oBuses->habilitado = 1;
+            }
+            $oBuses->save();
+            return ['status'=> 200, 'msg'=> 'Se actualizo con exito!'];
+        } catch (\Throwable $th) {
+            return ['status'=> 300, 'msg'=> 'Error de sistemas!', 'error'=> $th->getMessage()];
+            
+        }
+    }
 }
